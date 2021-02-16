@@ -1,6 +1,6 @@
 const { User } = require('../models')
 const { cookie } = require('../config')
-const { formValidator } = require('../utils')
+const { formValidator, jwt } = require('../utils')
 
 module.exports = {
     get: {
@@ -52,6 +52,34 @@ module.exports = {
                     console.log(err)
                     res.redirect('/user/register')
                 })
+        },
+        login(req, res, next) {
+        const formValidations = formValidator(req);
+
+        if(!formValidations.isOk){
+            res.render('./user/login.hbs', formValidations.contextOptions)
+            return;
+        }
+
+        const { username, password } = req.body;
+
+        User.findOne({ username })
+            .then(user => {
+                return Promise.all([ user.comparePasswords(password), user ])
+            })
+            .then(([ isPasswordMatched, user ]) => {
+                if(!isPasswordMatched){
+                    throw new Error('The passwords does not matched.')
+                }
+
+                const token = jwt.createToken(user._id);
+
+                res
+                .status(200)
+                .cookie(cookie, token, { maxAge: 3600000 })
+                .redirect('/home')
+            })
+            .catch(err => console.log(err))
         }
     }
 }
