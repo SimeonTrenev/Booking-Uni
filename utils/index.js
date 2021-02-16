@@ -3,5 +3,5 @@ const jwt = require('./jwt')
 
 module.exports = {
     formValidator,
-    jwt
+    jwt,
 }
