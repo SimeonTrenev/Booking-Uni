@@ -1,16 +1,18 @@
 const { hotelController } = require('../controllers')
-// const { isAuthNeededMiddleware  } = require('../utils')
+const { isAuthNeededMiddleware  } = require('../utils')
+// const { hotelValidation } = require('../utils')
 
 module.exports = (router) => {
 
-    router.get('/all',  hotelController.get.all)
-    router.get('/create',  hotelController.get.create)
-    router.get('/edit/:hotelId',  hotelController.get.edit)
-    router.get('/details/:hotelId',  hotelController.get.details)
-    router.get('/delete/:hotelId',  hotelController.get.delete)
+    router.get('/all', isAuthNeededMiddleware(),  hotelController.get.all)
+    router.get('/create', isAuthNeededMiddleware(), hotelController.get.create)
+    router.get('/edit/:hotelId', isAuthNeededMiddleware(), hotelController.get.edit)
+    router.get('/details/:hotelId', isAuthNeededMiddleware(), hotelController.get.details)
+    router.get('/delete/:hotelId', isAuthNeededMiddleware(), hotelController.get.delete)
+  
 
-    router.post('/create',  hotelController.post.create)
-    router.post('/edit/:hotelId', hotelController.post.edit)
+    router.post('/create', isAuthNeededMiddleware(), hotelController.post.create)
+    router.post('/edit/:hotelId', isAuthNeededMiddleware(), hotelController.post.edit)
 
     return router
 }

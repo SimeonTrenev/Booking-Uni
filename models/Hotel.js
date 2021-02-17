@@ -20,7 +20,8 @@ module.exports = (mongoose) => {
         },
         freeRooms: {
             type: Number,
-            required: true
+            required: true,
+            
         },
         owner: {
             type: ObjectId,

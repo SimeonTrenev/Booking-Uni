@@ -11,13 +11,23 @@ module.exports = {
             res.render('./user/register.hbs')
         },
         profile(req, res, next){
-            res.render('./user/profile.hbs')
+            
+            const { username } = req.params
+            
+            User
+            .findOne({username})
+            .lean()
+            .then(currentUser => {
+                res.render('./user/profile.hbs', currentUser)
+            })
+            
         },
         logout(req, res, next){
             res
             .clearCookie(cookie)
             .redirect('/home')
-        }
+        },
+        
 
     },
     post: {
