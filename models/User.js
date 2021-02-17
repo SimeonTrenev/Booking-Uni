@@ -1,9 +1,9 @@
-const { saltRounds } = require('../config');
+const { saltRounds } = require('../config')
 
 module.exports = (mongoose, bcrypt) => {
 
     const { Schema, model: Model } = mongoose;
-    const { String, ObjectId } = Schema.Types;
+    const { String, ObjectId, } = Schema.Types;
 
     const userSchema = new Schema({
         email: {
@@ -24,9 +24,9 @@ module.exports = (mongoose, bcrypt) => {
             {
             type: ObjectId,
             ref: 'Hotel'
-            }
+            }    
         ],
-        offeredHotels: [
+        OfferedHotels: [
             {
                 type: ObjectId,
                 ref: 'Hotel'
@@ -65,4 +65,5 @@ module.exports = (mongoose, bcrypt) => {
     })
 
     return Model('User', userSchema)
-}
+
+};

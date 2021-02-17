@@ -1,17 +1,18 @@
 module.exports = (mongoose) => {
+
     const { Schema, model: Model } = mongoose;
     const { String, ObjectId, Number } = Schema.Types;
 
     const hotelSchema = new Schema({
-        hotel : {
+        hotel: {
             type: String,
             required: true,
-            unique: true,
-
+            unique: true
         },
         city: {
             type: String,
-            required: true
+            required: true,
+            
         },
         imageUrl: {
             type: String,
@@ -19,21 +20,20 @@ module.exports = (mongoose) => {
         },
         freeRooms: {
             type: Number,
-            required: true,
-            minValue: 1,
-            maxValue: 100
+            required: true
+        },
+        owner: {
+            type: ObjectId,
+            require: true
         },
         usersBooked: [
             {
                 type: ObjectId,
                 ref: 'User'
             }
-        ],
-        owner: {
-            type: ObjectId,
-            required: true
-        }
+        ]
     });
 
     return Model('Hotel', hotelSchema)
+
 }

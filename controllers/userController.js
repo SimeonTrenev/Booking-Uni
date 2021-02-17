@@ -77,7 +77,7 @@ module.exports = {
                 res
                 .status(200)
                 .cookie(cookie, token, { maxAge: 3600000 })
-                .redirect('/home')
+                .redirect('/hotels/all')
             })
             .catch(err => console.log(err))
         }
