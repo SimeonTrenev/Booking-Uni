@@ -1,4 +1,5 @@
 const { Hotel } = require("../models");
+const { User } = require('../models')
 
 module.exports = {
   get: {
@@ -38,6 +39,29 @@ module.exports = {
         })
         .catch((err) => console.log(err));
     },
+    book(req, res, next) {
+        const { username, hotelId } = req.params
+    
+        User
+            .findOne({username})
+            .then(currentUser => {
+                currentUser.bookedHotels.push(hotelId)
+                currentUser.save()
+                res.redirect(`/hotels/details/${hotelId}`)
+            })
+            .catch(err => console.log(err));
+
+    //    Hotel
+    //         .findOne({hotelId})
+    //         .then(currentHotel => {
+    //             currentHotel.userBooked.push(username)
+    //             currentHotel.save()
+                
+    //         })
+
+        
+        
+    }
     
   },
   post: {

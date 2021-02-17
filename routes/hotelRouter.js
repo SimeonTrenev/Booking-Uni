@@ -9,6 +9,7 @@ module.exports = (router) => {
     router.get('/edit/:hotelId', isAuthNeededMiddleware(), hotelController.get.edit)
     router.get('/details/:hotelId', isAuthNeededMiddleware(), hotelController.get.details)
     router.get('/delete/:hotelId', isAuthNeededMiddleware(), hotelController.get.delete)
+    router.get('/book/:peopleId/:hotelId', hotelController.get.book)
   
 
     router.post('/create', isAuthNeededMiddleware(), hotelController.post.create)

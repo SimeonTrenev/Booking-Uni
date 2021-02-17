@@ -5,6 +5,7 @@ const isAuthNeededMiddleware = require('./isAuthNeededMiddleware')
 const loginMiddleware = require('./loginMiddleware')
 const registerMiddleware = require('./registerMiddleware')
 const hotelValidation = require('./hotelValidation')
+const errorHandler = require('./errorHandler')
 
 module.exports = {
     formValidator,
@@ -13,7 +14,8 @@ module.exports = {
     isAuthNeededMiddleware,
     loginMiddleware,
     registerMiddleware,
-    hotelValidation
+    hotelValidation,
+    errorHandler
 
 
 }

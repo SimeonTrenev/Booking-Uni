@@ -1,6 +1,7 @@
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-const { authMiddleware } = require('../utils')
+const { authMiddleware, errorHandler } = require('../utils')
+
 
 module.exports = (express, app) => {
     app.use(express.static('public'));
@@ -8,6 +9,7 @@ module.exports = (express, app) => {
     app.use(express.urlencoded({ extended: false }))
 
     app.use(cookieParser());
+    
 
     app.use(authMiddleware);
 
