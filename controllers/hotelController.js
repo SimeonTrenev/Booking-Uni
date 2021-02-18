@@ -7,6 +7,7 @@ module.exports = {
       Hotel.find({})
         .lean()
         .then((hotels) => {
+          hotels.sort((a, b) => b.freeRooms - a.freeRooms)
           res.render("./home/home.hbs", {
             hotels,
           });
